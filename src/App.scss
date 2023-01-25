@@ -1,0 +1,78 @@
+@use "./partials/variables" as *;
+@use "./partials/fonts" as *;
+
+.App {
+  background-image: url("./assets/images/bg-sidebar-mobile.svg");
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+  background-color: $color-background;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5%;
+
+  &__page-container {
+    display: flex;
+    gap: 1.6rem;
+    margin: 3rem 0;
+  }
+
+  &__page-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $neutral-white;
+    height: 3.6rem;
+    width: 3.6rem;
+    border-radius: 50%;
+    @include font-body-copy;
+    color: $neutral-white;
+    font-weight: 500;
+
+    &--active {
+      background-color: $color-count-blue;
+      border: none;
+      color: $color-primary-blue;
+    }
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $neutral-white;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+  }
+
+  &__button {
+    background: none;
+    color: $neutral-white;
+    border: none;
+    padding: 1rem 0;
+    width: 10rem;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    font-size: 1.6rem;
+    border-radius: 4px;
+
+    &--next {
+      background-color: $color-primary-blue;
+    }
+
+    &--prev {
+      color: $secondary-text-grey;
+      text-align: left;
+    }
+
+    &--confirm {
+      background-color: $color-purple;
+    }
+  }
+}

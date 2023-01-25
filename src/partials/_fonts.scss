@@ -1,0 +1,20 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+
+@mixin font-page-header() {
+  font-size: 1.6rem;
+
+  @include tablet {
+    font-size: 1.6rem;
+  }
+}
+
+@mixin font-body-copy() {
+  font-size: 1.6rem;
+
+  @include tablet {
+    font-size: 1.6rem;
+  }
+}
