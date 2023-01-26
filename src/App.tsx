@@ -14,19 +14,21 @@ type FormData = {
   plan: string;
   planType: string;
   addOns: string[];
+  cost: number;
 };
 
-const INITIAL_DATA = {
+const INITIAL_DATA: FormData = {
   name: "",
   email: "",
   phoneNumber: "",
   plan: "Arcade",
   planType: "Monthly",
   addOns: [""],
+  cost: 9,
 };
 
 const App = () => {
-  const [data, setData] = useState(INITIAL_DATA);
+  const [data, setData] = useState<FormData>(INITIAL_DATA);
 
   const updateFields = (fields: Partial<FormData>) => {
     setData((prev) => {

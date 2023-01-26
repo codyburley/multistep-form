@@ -12,6 +12,7 @@ const StepCounter = (props: {
       {steps.map((s) => {
         return (
           <div
+            key={steps.indexOf(s)}
             className={`step-counter__number ${
               currentStepIndex === steps.indexOf(s)
                 ? " step-counter__number--active"

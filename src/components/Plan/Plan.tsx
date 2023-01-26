@@ -1,4 +1,4 @@
-import React from "react";
+import { FormEvent, useEffect, useState } from "react";
 import "./Plan.scss";
 import arcadeIcon from "../../assets/images/icon-arcade.svg";
 import advancedIcon from "../../assets/images/icon-advanced.svg";
@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 type UserData = {
   plan: string;
   planType: string;
+  cost: number;
 };
 
 type PlanFormProps = UserData & {
@@ -56,7 +57,26 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const Plan = ({ plan, planType, updateFields }: PlanFormProps) => {
+const Plan = ({ plan, planType, cost, updateFields }: PlanFormProps) => {
+  const [prices, setPrices] = useState<number[]>([9, 12, 15]);
+  const handleClick = (option: string, price: number, e: FormEvent) => {
+    e.preventDefault();
+    updateFields({ plan: option, cost: price });
+  };
+
+  const handleChange = () => {
+    updateFields(
+      planType === "Monthly"
+        ? { planType: "Yearly", cost: cost * 10 }
+        : { planType: "Monthly", cost: cost / 10 }
+    );
+  };
+
+  useEffect(() => {
+    if (planType === "Yearly") return setPrices([90, 120, 150]);
+    setPrices([9, 12, 15]);
+  }, [planType]);
+
   return (
     <div className="plan">
       <h1 className="plan__title">Select your plan</h1>
@@ -64,32 +84,78 @@ const Plan = ({ plan, planType, updateFields }: PlanFormProps) => {
         You have the option of monthly or yearly billing.
       </p>
       <div className="plan__container">
-        <div className="plan__option">
+        <button
+          onClick={(e) => handleClick("Arcade", prices[0], e)}
+          className={`plan__option ${
+            plan === "Arcade" ? "plan__option--active" : null
+          }`}
+        >
           <img src={arcadeIcon} alt="Arcade" className="plan__icon" />
           <div className="plan__option-wrapper">
             <h2 className="plan__option-title">Arcade</h2>
-            <span className="plan__price">$9/mo</span>
+            <span className="plan__price">
+              ${prices[0]}/{planType === "Monthly" ? "mo" : "yr"}
+            </span>
+            {planType === "Monthly" ? null : (
+              <span className="plan__discount">2 months free</span>
+            )}
           </div>
-        </div>
-        <div className="plan__option">
-          <img src={advancedIcon} alt="Arcade" className="plan__icon" />
+        </button>
+        <button
+          onClick={(e) => handleClick("Advanced", prices[1], e)}
+          className={`plan__option ${
+            plan === "Advanced" ? "plan__option--active" : null
+          }`}
+        >
+          <img src={advancedIcon} alt="Advanced" className="plan__icon" />
           <div className="plan__option-wrapper">
             <h2 className="plan__option-title">Advanced</h2>
-            <span className="plan__price">$12/mo</span>
+            <span className="plan__price">
+              ${prices[1]}/{planType === "Monthly" ? "mo" : "yr"}
+            </span>
+            {planType === "Monthly" ? null : (
+              <span className="plan__discount">2 months free</span>
+            )}
           </div>
-        </div>
-        <div className="plan__option">
-          <img src={proIcon} alt="Arcade" className="plan__icon" />
+        </button>
+        <button
+          onClick={(e) => handleClick("Pro", prices[2], e)}
+          className={`plan__option ${
+            plan === "Pro" ? "plan__option--active" : null
+          }`}
+        >
+          <img src={proIcon} alt="Pro" className="plan__icon" />
           <div className="plan__option-wrapper">
             <h2 className="plan__option-title">Pro</h2>
-            <span className="plan__price">$15/mo</span>
+            <span className="plan__price">
+              ${prices[2]}/{planType === "Monthly" ? "mo" : "yr"}
+            </span>
+            {planType === "Monthly" ? null : (
+              <span className="plan__discount">2 months free</span>
+            )}
           </div>
-        </div>
+        </button>
       </div>
       <div className="plan__switch-container">
-        <span className="plan__switch-label">Monthly</span>
-        <AntSwitch inputProps={{ "aria-label": "ant design" }} />
-        <span className="plan__switch-label">Yearly</span>
+        <span
+          className={`plan__switch-label ${
+            planType === "Monthly" ? "plan__switch-label--active" : null
+          }`}
+        >
+          Monthly
+        </span>
+        <AntSwitch
+          inputProps={{ "aria-label": "ant design" }}
+          onChange={handleChange}
+          checked={planType === "Yearly" ? true : false}
+        />
+        <span
+          className={`plan__switch-label ${
+            planType === "Yearly" ? "plan__switch-label--active" : null
+          }`}
+        >
+          Yearly
+        </span>
       </div>
     </div>
   );

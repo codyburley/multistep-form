@@ -20,11 +20,18 @@
 
   &__option {
     cursor: pointer;
+    font-family: inherit;
     width: 100%;
     display: flex;
     border: 1px solid $secondary-background-grey;
     border-radius: 8px;
     padding: 1.4rem;
+    background-color: $neutral-white;
+
+    &--active {
+      background-color: $color-selected-option;
+      border-color: $color-selected-border;
+    }
   }
 
   &__option-wrapper {
@@ -32,17 +39,25 @@
     flex-direction: column;
     justify-content: space-between;
     margin-left: 1.4rem;
+    gap: 0.5rem;
   }
 
   &__option-title {
     margin: 0;
     color: $color-primary-blue;
     font-size: 1.6rem;
+    text-align: left;
   }
 
   &__price {
     color: $secondary-text-grey;
     font-size: 1.4rem;
+    text-align: left;
+  }
+
+  &__discount {
+    color: $color-primary-blue;
+    font-weight: 500;
   }
 
   &__switch-container {
@@ -58,5 +73,11 @@
   &__switch-label {
     margin: 0 1rem;
     font-size: 1.4rem;
+    font-weight: 500;
+    color: $secondary-text-grey;
+
+    &--active {
+      color: $color-primary-blue;
+    }
   }
 }
