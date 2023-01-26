@@ -1,0 +1,62 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+@use "../../partials/fonts" as *;
+
+.plan {
+  &__title {
+    @include font-page-header;
+    margin: 0;
+  }
+
+  &__description {
+    @include font-page-description;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__option {
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    border: 1px solid $secondary-background-grey;
+    border-radius: 8px;
+    padding: 1.4rem;
+  }
+
+  &__option-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1.4rem;
+  }
+
+  &__option-title {
+    margin: 0;
+    color: $color-primary-blue;
+    font-size: 1.6rem;
+  }
+
+  &__price {
+    color: $secondary-text-grey;
+    font-size: 1.4rem;
+  }
+
+  &__switch-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $secondary-background-grey;
+    margin-top: 1.4rem;
+    border-radius: 8px;
+    padding: 1rem 0;
+  }
+
+  &__switch-label {
+    margin: 0 1rem;
+    font-size: 1.4rem;
+  }
+}

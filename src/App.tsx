@@ -1,88 +1,79 @@
 import "./App.scss";
+import { useMultiStepForm } from "./hooks/useMultiStepForm";
+import { useState, FormEvent } from "react";
 import Personal from "./components/Personal/Personal";
 import Plan from "./components/Plan/Plan";
 import AddOns from "./components/AddOns/AddOns";
+import StepCounter from "./components/StepCounter/StepCounter";
 import Summary from "./components/Summary/Summary";
-import ThankYou from "./components/ThankYou/ThankYou";
-import { useState } from "react";
 
-function App() {
-  const [page, setPage] = useState<number>(0);
+type FormData = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  plan: string;
+  planType: string;
+  addOns: string[];
+};
 
-  const componentList: JSX.Element[] = [
-    <Personal />,
-    <Plan />,
-    <AddOns />,
-    <Summary />,
-    <ThankYou />,
-  ];
+const INITIAL_DATA = {
+  name: "",
+  email: "",
+  phoneNumber: "",
+  plan: "Arcade",
+  planType: "Monthly",
+  addOns: [""],
+};
 
+const App = () => {
+  const [data, setData] = useState(INITIAL_DATA);
+
+  const updateFields = (fields: Partial<FormData>) => {
+    setData((prev) => {
+      return { ...prev, ...fields };
+    });
+  };
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!isLastStep) return next();
+    alert("Successful account creation");
+  };
+
+  const { step, steps, currentStepIndex, isFirstStep, isLastStep, back, next } =
+    useMultiStepForm([
+      <Personal {...data} updateFields={updateFields} />,
+      <Plan {...data} updateFields={updateFields} />,
+      <AddOns {...data} updateFields={updateFields} />,
+      <Summary />,
+    ]);
   return (
     <div className="App">
-      <div className="App__page-container">
-        <div
-          className={`App__page-count ${
-            page === 0 ? "App__page-count--active" : ""
-          }`}
-        >
-          1
-        </div>
-        <div
-          className={`App__page-count ${
-            page === 1 ? "App__page-count--active" : ""
-          }`}
-        >
-          2
-        </div>
-        <div
-          className={`App__page-count ${
-            page === 2 ? "App__page-count--active" : ""
-          }`}
-        >
-          3
-        </div>
-        <div
-          className={`App__page-count ${
-            page >= 3 ? "App__page-count--active" : ""
-          }`}
-        >
-          4
-        </div>
-      </div>
-      <div className="App__component">{componentList[page]}</div>
-      {page === 4 ? (
-        ""
-      ) : (
-        <footer className="App__footer">
-          {page === 0 ? (
-            <div></div>
-          ) : (
+      <StepCounter steps={steps} currentStepIndex={currentStepIndex} />
+      <form className="App__form" onSubmit={onSubmit}>
+        <div className="App__component">{step}</div>
+        <div className="App__button-container">
+          {!isFirstStep && (
             <button
-              className="App__button App__button--prev"
-              onClick={() => setPage((prev) => prev - 1)}
+              type="button"
+              onClick={back}
+              className="App__button App__button--back"
             >
-              Go Back
+              Back
             </button>
           )}
-          {page === 3 ? (
-            <button
-              className="App__button App__button--confirm"
-              onClick={() => setPage((prev) => prev + 1)}
-            >
-              Confirm
-            </button>
-          ) : (
-            <button
-              className="App__button App__button--next"
-              onClick={() => setPage((prev) => prev + 1)}
-            >
-              Next Step
-            </button>
-          )}
-        </footer>
-      )}
+          <button
+            type="submit"
+            className={`App__button ${
+              isLastStep ? "App__button--confirm" : "App__button--next"
+            }`}
+          >
+            {isLastStep ? "Finish" : "Next"}
+          </button>
+        </div>
+      </form>
     </div>
   );
-}
+};
 
 export default App;

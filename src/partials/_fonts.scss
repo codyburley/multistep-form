@@ -4,7 +4,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
 
 @mixin font-page-header() {
+  font-size: 2.4rem;
+  color: $color-primary-blue;
+
+  @include tablet {
+    font-size: 2.4rem;
+  }
+}
+
+@mixin font-page-description() {
   font-size: 1.6rem;
+  color: $secondary-text-grey;
 
   @include tablet {
     font-size: 1.6rem;

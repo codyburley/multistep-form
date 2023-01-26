@@ -1,0 +1,28 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+@use "../../partials/fonts" as *;
+
+.step-counter {
+  display: flex;
+  gap: 1.6rem;
+  margin: 3rem 0;
+
+  &__number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $neutral-white;
+    height: 3.6rem;
+    width: 3.6rem;
+    border-radius: 50%;
+    @include font-body-copy;
+    color: $neutral-white;
+    font-weight: 500;
+
+    &--active {
+      background-color: $color-count-blue;
+      border: none;
+      color: $color-primary-blue;
+    }
+  }
+}

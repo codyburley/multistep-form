@@ -1,0 +1,31 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+@use "../../partials/fonts" as *;
+
+.personal {
+  &__title {
+    @include font-page-header;
+    margin: 0;
+  }
+
+  &__description {
+    @include font-page-description;
+  }
+
+  &__label {
+    display: block;
+    font-size: 1.2rem;
+    color: $color-primary-blue;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  &__input {
+    font: inherit;
+    width: 100%;
+    font-size: 1.6rem;
+    border-radius: 4px;
+    border: 1px solid $secondary-background-grey;
+    padding: 1rem 1.6rem;
+  }
+}
