@@ -1,0 +1,14 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+@use "../../partials/fonts" as *;
+
+.addons {
+  &__title {
+    @include font-page-header;
+    margin: 0;
+  }
+
+  &__description {
+    @include font-page-description;
+  }
+}

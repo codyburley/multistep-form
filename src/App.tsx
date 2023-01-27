@@ -13,8 +13,9 @@ type FormData = {
   phoneNumber: string;
   plan: string;
   planType: string;
+  planCost: number;
   addOns: string[];
-  cost: number;
+  addOnsCost: number[];
 };
 
 const INITIAL_DATA: FormData = {
@@ -23,8 +24,9 @@ const INITIAL_DATA: FormData = {
   phoneNumber: "",
   plan: "Arcade",
   planType: "Monthly",
-  addOns: [""],
-  cost: 9,
+  planCost: 9,
+  addOns: [],
+  addOnsCost: [],
 };
 
 const App = () => {

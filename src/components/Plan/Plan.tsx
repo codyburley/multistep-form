@@ -9,7 +9,7 @@ import { styled } from "@mui/material/styles";
 type UserData = {
   plan: string;
   planType: string;
-  cost: number;
+  planCost: number;
 };
 
 type PlanFormProps = UserData & {
@@ -57,18 +57,18 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const Plan = ({ plan, planType, cost, updateFields }: PlanFormProps) => {
+const Plan = ({ plan, planType, planCost, updateFields }: PlanFormProps) => {
   const [prices, setPrices] = useState<number[]>([9, 12, 15]);
   const handleClick = (option: string, price: number, e: FormEvent) => {
     e.preventDefault();
-    updateFields({ plan: option, cost: price });
+    updateFields({ plan: option, planCost: price });
   };
 
   const handleChange = () => {
     updateFields(
       planType === "Monthly"
-        ? { planType: "Yearly", cost: cost * 10 }
-        : { planType: "Monthly", cost: cost / 10 }
+        ? { planType: "Yearly", planCost: planCost * 10 }
+        : { planType: "Monthly", planCost: planCost / 10 }
     );
   };
 
