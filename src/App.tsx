@@ -1,38 +1,30 @@
 import "./App.scss";
 import { useMultiStepForm } from "./hooks/useMultiStepForm";
 import { useState, FormEvent } from "react";
-import Personal from "./components/Personal/Personal";
-import Plan from "./components/Plan/Plan";
-import AddOns from "./components/AddOns/AddOns";
+import Personal from "./pages/Personal/Personal";
+import Plan from "./pages/Plan/Plan";
+import AddOns from "./pages/AddOns/AddOns";
 import StepCounter from "./components/StepCounter/StepCounter";
-import Summary from "./components/Summary/Summary";
+import Summary from "./pages/Summary/Summary";
+import { UserData } from "./types";
+import { ArcadePlan } from "./constants";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import ThankYou from "./pages/ThankYou/ThankYou";
 
-type FormData = {
-  name: string;
-  email: string;
-  phoneNumber: string;
-  plan: string;
-  planType: string;
-  planCost: number;
-  addOns: string[];
-  addOnsCost: number[];
-};
-
-const INITIAL_DATA: FormData = {
+const INITIAL_DATA: UserData = {
   name: "",
   email: "",
   phoneNumber: "",
-  plan: "Arcade",
   planType: "Monthly",
-  planCost: 9,
+  plan: ArcadePlan,
   addOns: [],
-  addOnsCost: [],
 };
 
 const App = () => {
-  const [data, setData] = useState<FormData>(INITIAL_DATA);
+  const [data, setData] = useState<UserData>(INITIAL_DATA);
+  const navigate = useNavigate();
 
-  const updateFields = (fields: Partial<FormData>) => {
+  const updateFields = (fields: Partial<UserData>) => {
     setData((prev) => {
       return { ...prev, ...fields };
     });
@@ -41,7 +33,8 @@ const App = () => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!isLastStep) return next();
-    alert("Successful account creation");
+    console.log(data);
+    navigate("/thank-you");
   };
 
   const { step, steps, currentStepIndex, isFirstStep, isLastStep, back, next } =
@@ -49,33 +42,46 @@ const App = () => {
       <Personal {...data} updateFields={updateFields} />,
       <Plan {...data} updateFields={updateFields} />,
       <AddOns {...data} updateFields={updateFields} />,
-      <Summary />,
+      <Summary {...data} />,
     ]);
+
   return (
     <div className="App">
-      <StepCounter steps={steps} currentStepIndex={currentStepIndex} />
-      <form className="App__form" onSubmit={onSubmit}>
-        <div className="App__component">{step}</div>
-        <div className="App__button-container">
-          {!isFirstStep && (
-            <button
-              type="button"
-              onClick={back}
-              className="App__button App__button--back"
-            >
-              Back
-            </button>
-          )}
-          <button
-            type="submit"
-            className={`App__button ${
-              isLastStep ? "App__button--confirm" : "App__button--next"
-            }`}
-          >
-            {isLastStep ? "Finish" : "Next"}
-          </button>
+      <div className="App__wrapper">
+        <div className="App__step-container">
+          <StepCounter steps={steps} currentStepIndex={currentStepIndex} />
         </div>
-      </form>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <form className="App__form" onSubmit={onSubmit}>
+                <div className="App__component">{step}</div>
+                <div className="App__button-container">
+                  {!isFirstStep && (
+                    <button
+                      type="button"
+                      onClick={back}
+                      className="App__button App__button--back"
+                    >
+                      Go Back
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className={`App__button ${
+                      isLastStep ? "App__button--confirm" : "App__button--next"
+                    }`}
+                  >
+                    {isLastStep ? "Confirm" : "Next"}
+                  </button>
+                </div>
+              </form>
+            }
+          />
+          <Route path="/thank-you" element={<ThankYou />} />
+        </Routes>
+      </div>
     </div>
   );
 };

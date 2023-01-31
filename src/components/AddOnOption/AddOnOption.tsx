@@ -1,44 +1,52 @@
 import "./AddOnOption.scss";
 import { ChangeEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { UserData, AddOnData } from "../../types";
 
-type UserData = {
-  addOns: string[];
-  planType: string;
+type TestType = {
+  planType: "Monthly" | "Yearly";
+  addOns: AddOnData[];
 };
 
-type ServiceData = {
-  title: string;
-  description: string;
-  price: number;
-};
-
-type AddOnsOptionsProps = ServiceData &
-  UserData & {
+type AddOnsOptionsProps = AddOnData &
+  TestType & {
     updateFields: (fields: Partial<UserData>) => void;
   };
 
 const AddOnOption = ({
   title,
   description,
-  price,
+  monthlyPrice,
+  yearlyPrice,
   addOns,
   planType,
   updateFields,
 }: AddOnsOptionsProps) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(
+    !!addOns.find((el) => el.title === title)
+  );
+
+  const addOnObj: AddOnData = {
+    title,
+    description,
+    monthlyPrice,
+    yearlyPrice,
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
-    const index: number = addOns.findIndex((el) => el === title);
-    if (index === -1) return updateFields({ addOns: [...addOns, title] });
-    return updateFields({ addOns: addOns.filter((item) => item !== title) });
+    const index = addOns.find((el) => el.title === title);
+    if (!index)
+      return updateFields({
+        addOns: [...addOns, addOnObj],
+      });
+    return updateFields({
+      addOns: addOns.filter((item) => item.title !== title),
+    });
   };
 
   return (
     <label
       className={`addon-option ${isChecked ? " addon-option--active" : ""}`}
-      key={uuidv4()}
     >
       <input type="checkbox" checked={isChecked} onChange={handleChange} />
       <span className="checkmark"></span>
@@ -47,7 +55,8 @@ const AddOnOption = ({
         <span className="addon-option__description">{description}</span>
       </div>
       <span className="addon-option__price">
-        ${price}/{planType === "Monthly" ? "mo" : "yr"}
+        ${planType === "Monthly" ? monthlyPrice : yearlyPrice}/
+        {planType === "Monthly" ? "mo" : "yr"}
       </span>
     </label>
   );

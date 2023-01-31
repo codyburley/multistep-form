@@ -1,10 +1,5 @@
 import "./Personal.scss";
-
-type UserData = {
-  name: string;
-  email: string;
-  phoneNumber: string;
-};
+import { UserData } from "../../types";
 
 type PersonalFormProps = UserData & {
   updateFields: (fields: Partial<UserData>) => void;
@@ -25,7 +20,7 @@ const Personal = ({
       <label className="personal__label">Name</label>
       <input
         className="personal__input"
-        placeholder="e.g. Stephen King"
+        placeholder="e.g. Chuck Palahniuk"
         required
         type="text"
         value={name}
@@ -35,7 +30,7 @@ const Personal = ({
       <label className="personal__label">Email Address</label>
       <input
         className="personal__input"
-        placeholder="e.g. stephenking@lorem.com"
+        placeholder="e.g. chuckpalahniuk@lorem.com"
         required
         type="email"
         value={email}

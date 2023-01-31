@@ -18,6 +18,11 @@
     color: $color-primary-blue;
     font-weight: 500;
     margin-bottom: 0.3rem;
+
+    @include desktop {
+      font-size: 1.4rem;
+      margin: 2.4rem 0 0.6rem;
+    }
   }
 
   &__input {
@@ -27,5 +32,10 @@
     border-radius: 4px;
     border: 1px solid $secondary-background-grey;
     padding: 1rem 1.6rem;
+    color: $color-primary-blue;
+
+    @include desktop {
+      padding: 1.2rem 1.6rem;
+    }
   }
 }

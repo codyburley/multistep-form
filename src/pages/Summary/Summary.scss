@@ -1,0 +1,92 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+@use "../../partials/fonts" as *;
+
+.summary {
+  &__title {
+    @include font-page-header;
+    margin: 0;
+  }
+
+  &__description {
+    @include font-page-description;
+  }
+
+  &__breakdown {
+    background-color: $color-background;
+    padding: 1rem;
+
+    @include desktop {
+      padding: 2.4rem 2.4rem;
+    }
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $secondary-background-grey;
+    padding-bottom: 1rem;
+    background-color: $color-background;
+
+    @include desktop {
+      padding-bottom: 2.4rem;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__plan {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: $color-primary-blue;
+    margin-bottom: 0.5rem;
+  }
+
+  &__price {
+    @extend .summary__plan;
+    font-weight: 700;
+  }
+
+  &__button {
+    background: none;
+    color: $secondary-text-grey;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    text-align: left;
+  }
+
+  &__total-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    margin-top: 2rem;
+
+    @include desktop {
+      padding: 0 2.4rem;
+    }
+  }
+
+  &__total-label {
+    font-size: 1.4rem;
+    color: $secondary-text-grey;
+  }
+
+  &__total-amount {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $color-purple;
+
+    @include desktop {
+      font-size: 1.8rem;
+    }
+  }
+}

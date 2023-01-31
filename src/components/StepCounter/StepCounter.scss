@@ -6,6 +6,16 @@
   display: flex;
   gap: 1.6rem;
   margin: 3rem 0;
+  justify-content: center;
+
+  @include desktop {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__container {
+    display: flex;
+  }
 
   &__number {
     display: flex;
@@ -24,5 +34,24 @@
       border: none;
       color: $color-primary-blue;
     }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1.6rem;
+  }
+
+  &__step {
+    color: $secondary-text-grey;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  &__title {
+    color: $neutral-white;
+    font-size: 1.6rem;
+    font-weight: 500;
   }
 }

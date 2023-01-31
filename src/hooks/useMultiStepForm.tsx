@@ -19,6 +19,7 @@ export const useMultiStepForm = (steps: ReactElement[]) => {
   const goTo = (index: number) => {
     setCurrentStepIndex(index);
   };
+
   return {
     currentStepIndex,
     step: steps[currentStepIndex],

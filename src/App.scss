@@ -1,5 +1,6 @@
 @use "./partials/variables" as *;
 @use "./partials/fonts" as *;
+@use "./partials/mixins" as *;
 
 .App {
   background-image: url("./assets/images/bg-sidebar-mobile.svg");
@@ -14,16 +15,67 @@
   align-items: center;
   //padding: 0 5%;
 
+  @include desktop {
+    background-image: none;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &__wrapper {
+    @include desktop {
+      display: flex;
+      width: 100%;
+      max-width: 128rem;
+      height: 75%;
+      background-color: $neutral-white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 0 5%;
+      -webkit-box-shadow: 0px 20px 25px -14px rgba(156, 156, 156, 0.6);
+      -moz-box-shadow: 0px 20px 25px -14px rgba(156, 156, 156, 0.6);
+      box-shadow: 0px 20px 25px -14px rgba(156, 156, 156, 0.6);
+    }
+  }
+
+  &__step-container {
+    @include desktop {
+      background-image: url("./assets/images/bg-sidebar-desktop.svg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 35%;
+      padding: 3rem 2.4rem;
+      border-radius: 8px;
+    }
+  }
+
   &__form {
     width: 100%;
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6rem 10% 0;
+    }
   }
 
   &__component {
     background-color: $neutral-white;
     border-radius: 8px;
     padding: 2.6rem 5%;
-    // width: 100%;
     margin: 0 5%;
+    -webkit-box-shadow: 0px 20px 25px -14px rgba(156, 156, 156, 0.6);
+    -moz-box-shadow: 0px 20px 25px -14px rgba(156, 156, 156, 0.6);
+    box-shadow: 0px 20px 25px -14px rgba(156, 156, 156, 0.6);
+
+    @include desktop {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 
   &__button-container {
@@ -36,6 +88,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 5%;
+
+    @include desktop {
+      width: auto;
+      position: relative;
+      padding: 0;
+    }
   }
 
   &__button {
