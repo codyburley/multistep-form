@@ -43,7 +43,7 @@ const Personal = ({
         placeholder="e.g. 123-456-7890"
         required
         type="tel"
-        pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         value={phoneNumber}
         onChange={(e) => updateFields({ phoneNumber: e.target.value })}
       />
