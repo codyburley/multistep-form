@@ -23,6 +23,7 @@
   }
 
   &__wrapper {
+    width: 100%;
     @include desktop {
       display: flex;
       width: 100%;

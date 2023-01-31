@@ -37,10 +37,13 @@
   }
 
   &__wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 1.6rem;
+    display: none;
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 1.6rem;
+    }
   }
 
   &__step {
