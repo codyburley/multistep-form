@@ -2,15 +2,11 @@ import "./AddOnOption.scss";
 import { ChangeEvent, useState } from "react";
 import { UserData, AddOnData } from "../../types";
 
-type TestType = {
+type AddOnsOptionsProps = AddOnData & {
   planType: "Monthly" | "Yearly";
   addOns: AddOnData[];
+  updateFields: (fields: Partial<UserData>) => void;
 };
-
-type AddOnsOptionsProps = AddOnData &
-  TestType & {
-    updateFields: (fields: Partial<UserData>) => void;
-  };
 
 const AddOnOption = ({
   title,

@@ -24,10 +24,10 @@ const Summary = ({ plan, planType, addOns }: UserData) => {
     return addOnTotal + planCost;
   };
 
-  const handleClick = (e: FormEvent) => {
-    e.preventDefault();
-    // goTo go here
-  };
+  // const handleClick = (e: FormEvent) => {
+  //   e.preventDefault();
+  //   // goTo go here
+  // };
 
   return (
     <div className="summary">
@@ -41,9 +41,9 @@ const Summary = ({ plan, planType, addOns }: UserData) => {
             <span className="summary__plan">
               {plan.name} ({planType})
             </span>
-            <button className="summary__button" onClick={(e) => handleClick(e)}>
+            {/* <button className="summary__button" onClick={(e) => handleClick(e)}>
               Change
-            </button>
+            </button> */}
           </div>
           <span className="summary__price">
             ${planType === "Monthly" ? plan.monthlyCost : plan.yearlyCost}/

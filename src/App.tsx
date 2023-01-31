@@ -37,7 +37,7 @@ const App = () => {
     navigate("/thank-you");
   };
 
-  const { step, steps, currentStepIndex, isFirstStep, isLastStep, back, next } =
+  const { step, currentStepIndex, isFirstStep, isLastStep, back, next } =
     useMultiStepForm([
       <Personal {...data} updateFields={updateFields} />,
       <Plan {...data} updateFields={updateFields} />,
@@ -49,7 +49,7 @@ const App = () => {
     <div className="App">
       <div className="App__wrapper">
         <div className="App__step-container">
-          <StepCounter steps={steps} currentStepIndex={currentStepIndex} />
+          <StepCounter currentStepIndex={currentStepIndex} />
         </div>
         <Routes>
           <Route
