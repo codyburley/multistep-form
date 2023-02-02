@@ -80,15 +80,13 @@
   }
 
   &__button-container {
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    background-color: $neutral-white;
+
     height: 7rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5%;
+    padding: 6rem 5% 0;
 
     @include desktop {
       width: auto;
@@ -112,15 +110,27 @@
     &--next {
       background-color: $color-primary-blue;
       margin-left: auto;
+
+      &:hover {
+        filter: brightness(150%);
+      }
     }
 
     &--back {
       color: $secondary-text-grey;
       text-align: left;
+
+      &:hover {
+        color: $color-primary-blue;
+      }
     }
 
     &--confirm {
       background-color: $color-purple;
+
+      &:hover {
+        filter: brightness(150%);
+      }
     }
   }
 
